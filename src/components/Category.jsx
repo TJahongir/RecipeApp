@@ -6,22 +6,22 @@ import {NavLink} from 'react-router-dom'
 const Category = () => {
   return (
     <List>
-        <NavLink to={'/cuisine/Italian'}>
+        <SLink to={'/cuisine/Italian'}>
             <FaPizzaSlice />
             <h4>Italian</h4>
-        </NavLink>
-        <NavLink to={'/cuisine/American'}>
+        </SLink>
+        <SLink to={'/cuisine/American'}>
             <FaHamburger />
             <h4>American</h4>
-        </NavLink>
-        <NavLink to={'/cuisine/Thai'}>
+        </SLink>
+        <SLink to={'/cuisine/Thai'}>
             <GiNoodles />
             <h4>Thai</h4>
-        </NavLink>
-        <NavLink to={'/cuisine/Chinese'}>
+        </SLink>
+        <SLink to={'/cuisine/Chinese'}>
             <GiChopsticks />
             <h4>Chinese</h4>
-        </NavLink>
+        </SLink>
     </List>
   )
 }
@@ -31,5 +31,32 @@ const List = styled.div`
     margin: 2rem 0rem;
     justify-content: center;
 `
+
+const SLink = styled(NavLink)`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    flex-direction: column;
+    margin-right: 2rem;
+    text-decoration: none;
+    background: linear-gradient(35deg, #494949, #313131);
+    width: 6rem;
+    height: 6rem;
+    cursor: pointer;
+    transform: scale(0.8);
+
+    h4 {
+        color: white;
+        font-size: 0.8rem;
+    }
+
+    svg {
+        color: white;
+        font-size: 1.5rem;
+        
+    }
+
+    `
 
 export default Category
