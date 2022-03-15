@@ -1,11 +1,13 @@
 import {useEffect, useState} from 'react'
 import {useParams} from 'react-router-dom'
 import styled from 'styled-components'
+import {motion} from 'framer-motion'
 
 const Recipe = () => {
   let params = useParams()
 
   const [details, setDetails] = useState({})
+  const [activeTab, setActiveTab] = useState('instructions')
 
   const fetchDetails = async () => {
     const data = await fetch(`https://api.spoonacular.com/recipes/${params.id}/information?apiKey=${process.env.REACT_APP_API_KEY}`)
@@ -19,21 +21,43 @@ const Recipe = () => {
   },[params.id])
 
   return (
-    <DetailWrapper>
+    <DetailWrapper 
+      animate={{opacity: 1}}
+      initial={{opacity:0}}
+      exit ={{opacity: 0}}
+      transition = {{duration: 0.8}}
+    >
       <div>
         <h2>{details.title}</h2>
         <img src={details.image} alt={details.title} />
       </div>
       <Info>
-        <Button>Instructions</Button>
-        <Button>Ingredients</Button>
+        <Button className={activeTab === 'instructions' ? 'active' : ""  } onClick={() => setActiveTab('instructions')}>Instructions</Button>
+        <Button className={activeTab === 'ingredients' ? 'active' : ""  } onClick={() => setActiveTab('ingredients')}>Ingredients</Button>
+        
+        {activeTab === 'instructions' && (
+          <div>
+            <h3 dangerouslySetInnerHTML={{__html: details.summary}}></h3>
+            <h3 dangerouslySetInnerHTML={{__html: details.instructions}}></h3>
+          </div>
+        )}
+        {activeTab === 'ingredients' && (
+          <ul>
+            {details.extendedIngredients.map((ingredient) => {
+              return (
+                <li key={ingredient.id}>{ingredient.original}</li>
+              )
+            })
+          }
+          </ul>
+        )}
       </Info>
     </DetailWrapper>
   )
 }
 
 
-const DetailWrapper = styled.div`
+const DetailWrapper = styled(motion.div)`
   margin-top: 5rem;
   margin-bottom: 5rem;
   display: flex;
