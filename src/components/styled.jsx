@@ -53,4 +53,27 @@ const List = styled.div`
     margin: 2rem 0rem;
 
 `
-export { Wrapper, Gradient, Card, List} 
+
+const Grid = styled.div`
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    grid-gap: 3rem;
+`
+
+const CCard = styled.div`
+    img {
+        width: 100%;
+        border-radius: 2rem;
+    }
+    a {
+        text-decoration: none;
+    }
+    h4 {
+        text-align: center;
+        padding: 1rem;
+    }
+
+`
+
+
+export { Wrapper, Gradient, Card, List, Grid, CCard} 
