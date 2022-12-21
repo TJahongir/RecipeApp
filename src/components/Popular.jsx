@@ -41,6 +41,7 @@ function Popular() {
                 drag: 'free',
                 gap: '4rem',
             }}>
+            <h1>Hey there! We are Back to take over!</h1>
             {popular.map((recipe) => {
                 return(
                     <SplideSlide key={recipe.id}>
